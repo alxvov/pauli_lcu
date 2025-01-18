@@ -52,9 +52,10 @@ static inline void pauli_coefficients(uint32_t dim, double complex *data) {
     double complex *a, *b;
 
     // XOR transform
-    #pragma omp parallel for private(a, b, v, i)
+    // #pragma omp parallel for private(a, b, v, i)
     for(j = 0; j < dim; j++) {
         b = data + j * dim;
+        #pragma omp parallel for private(a, v)
         for(i = 0; i < j; i++) {
             // swap
             a = data + i * dim;
